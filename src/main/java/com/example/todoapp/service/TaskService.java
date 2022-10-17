@@ -7,11 +7,12 @@ import com.example.todoapp.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class TasksService {
+public class TaskService {
     private final TaskRepository taskRepository;
 
     public Task addTask(Task task) {
@@ -27,9 +28,25 @@ public class TasksService {
         Optional.ofNullable(task.getOrder())
                 .ifPresent(order -> findTask.setOrder(order));
         Optional.ofNullable(task.getCompleted())
-                .ifPresent(completed -> findTask.setCompleted((Boolean) completed));
+                .ifPresent(completed -> findTask.setCompleted(completed));
 
         return taskRepository.save(findTask);
+    }
+
+    public Task findTask(Long taskId) {
+        return findVerifiedMember(taskId);
+    }
+
+    public List<Task> findAllTask() {
+        return taskRepository.findAll();
+    }
+
+    public void deleteTask(Long taskId) {
+        taskRepository.deleteById(taskId);
+    }
+
+    public void deleteAllTask() {
+        taskRepository.deleteAll();
     }
 
     public Task findVerifiedMember(long tasksId) {
@@ -40,5 +57,7 @@ public class TasksService {
                         new BusinessLogicException(ExceptionCode.TASKS_NOT_FOUND));
         return findTask;
     }
+
+
 
 }

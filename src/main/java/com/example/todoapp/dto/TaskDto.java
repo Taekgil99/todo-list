@@ -1,26 +1,35 @@
 package com.example.todoapp.dto;
 
-import lombok.Setter;
+import lombok.*;
 
-@Setter
-public class TasksDto {
-    public class Post {
+
+public class TaskDto {
+    private String url;
+    @Getter
+    @AllArgsConstructor
+    public static class Post {
         private String title;
         private String order;
-        private boolean completed;
+        private Boolean completed;
     }
 
-    public class Patch {
+    @Getter
+    @AllArgsConstructor
+    public static class Patch {
         private String title;
         private String order;
-        private boolean completed;
+        private Boolean completed;
     }
 
-    public class Response {
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    public static class Response {
         private Long taskId;
         private String title;
         private Long order;
-        private boolean completed;
+        private Boolean completed;
+        private String url;
     }
 
 }
