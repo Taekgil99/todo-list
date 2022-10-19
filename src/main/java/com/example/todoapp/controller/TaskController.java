@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(allowedHeaders ="*", origins = "*")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/task")
+@RequestMapping
 @Slf4j
 public class TaskController {
 
